@@ -33,4 +33,9 @@ public class Desenvolvedora extends Pessoa {
 	public ArrayList<Jogador> getClientes() {
 		return clientes;
 	}
+	
+	@Override
+	public void imprime() {
+		System.out.println("Impressão da classe Desenvolvedora");
+	}
 }

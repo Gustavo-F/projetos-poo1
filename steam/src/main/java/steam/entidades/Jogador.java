@@ -78,4 +78,9 @@ public class Jogador extends Pessoa {
 		this.apelido = apelido;
 	}
 
+	@Override
+	public void imprime() {
+		System.out.println("Impressão da classe Jogador");
+	}
+
 }

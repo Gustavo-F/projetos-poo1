@@ -45,5 +45,8 @@ public class Pessoa {
 	public String getEmail() {
 		return email;
 	}
-
+	
+	public void imprime() {
+		System.out.println("Impressão da classe Pessoa");
+	}
 }
