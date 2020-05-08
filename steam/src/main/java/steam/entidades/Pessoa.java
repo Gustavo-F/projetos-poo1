@@ -2,7 +2,7 @@ package steam.entidades;
 
 import java.util.ArrayList;
 
-public class Pessoa {
+public abstract class Pessoa {
 	private String nome;
 	private String email;
 	protected ArrayList<Jogo> jogos; // protected significa que tanto a classe, quanto as classes filhas podem
@@ -45,8 +45,11 @@ public class Pessoa {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void imprime() {
 		System.out.println("Impressão da classe Pessoa");
+		imprimeAbstrato();
 	}
+
+	public abstract void imprimeAbstrato();
 }

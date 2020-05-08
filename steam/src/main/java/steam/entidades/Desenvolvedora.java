@@ -34,8 +34,13 @@ public class Desenvolvedora extends Pessoa {
 		return clientes;
 	}
 	
+//	@Override
+//	public void imprime() {
+//		System.out.println("Impressão da classe Desenvolvedora");
+//	}
+
 	@Override
-	public void imprime() {
-		System.out.println("Impressão da classe Desenvolvedora");
+	public void imprimeAbstrato() {
+		System.out.println("Impressão concreta da classe desenvolvedora.");		
 	}
 }
