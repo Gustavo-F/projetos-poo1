@@ -7,7 +7,7 @@ import steam.entidades.Jogo;
 public class JogoDAO implements InterfaceDAO<Jogo>{
 
 	public void adicionar(Jogo referencia) {
-		System.out.println("Adicionar da classe JogoDAO");
+		// TODO Auto-generated method stub
 		
 	}
 

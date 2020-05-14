@@ -7,7 +7,7 @@ import steam.entidades.Jogador;
 public class JogadorDAO implements InterfaceDAO<Jogador> {
 
 	public void adicionar(Jogador referencia) {
-		System.out.println("Adicionar da classe JogadorDAO");
+		// TODO Auto-generated method stub
 		
 	}
 

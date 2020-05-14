@@ -9,7 +9,7 @@ import java.util.List;
  * nossa referência é do tipo InterfaceDAO, sendo que o objeto em si poderá ser
  * de qualquer classe que implemente o contrato InterfaceDAO.
  */
-public interface InterfaceDAO<Tipo> {
+public interface InterfaceDAO<T> {
 	/*
 	 * Ao declarar um <Tipo> genérico ao lado do nome da classe, estamos dizendo que
 	 * esta classe poderá ser utilizada para qualquer tipo de objeto. É assim que as
@@ -22,11 +22,11 @@ public interface InterfaceDAO<Tipo> {
 	 * com o banco de dados em relação a uma única entidade ou a um conjunto de
 	 * entidades.
 	 */
-	public void adicionar(Tipo referencia);
+	public void adicionar(T referencia);
 
-	public void remover(Tipo referencia);
+	public void remover(T referencia);
 
-	public List<Tipo> todos();
+	public List<T> todos();
 
 	/*
 	 * Como o método para recuperar um único objeto depende do identificador de cada

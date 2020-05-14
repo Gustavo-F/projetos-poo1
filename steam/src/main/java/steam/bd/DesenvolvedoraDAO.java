@@ -7,7 +7,8 @@ import steam.entidades.Desenvolvedora;
 public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 
 	public void adicionar(Desenvolvedora referencia) {
-		System.out.println("Adicionar da classe DesenvolvedoraDAO");
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void remover(Desenvolvedora referencia) {
