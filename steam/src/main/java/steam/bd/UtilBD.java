@@ -6,15 +6,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UtilBD {
-	private Connection conexao;
+	private static Connection conexao;
 
-	public Connection getConexao() {
-		if (conexao == null)
-			abrirConexao();
+	public static Connection getConexao() {
+		try {
+
+			if (conexao == null)
+				abrirConexao();
+
+			if (conexao.isClosed())
+				abrirConexao();
+
+		} catch (SQLException e) {
+			System.err.println("Não consegui abrir a conexão com o banco!");
+		}
+
 		return conexao;
 	}
 
-	private void abrirConexao() {
+	private static void abrirConexao() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conexao = DriverManager.getConnection("jdbc:sqlite:banco.sqlite");
@@ -25,7 +35,7 @@ public class UtilBD {
 		}
 	}
 
-	public void fecharConexao() {
+	public static void fecharConexao() {
 		if (conexao == null)
 			return;
 
@@ -35,10 +45,9 @@ public class UtilBD {
 		} catch (SQLException e) {
 			System.err.println("Não consegui fechar a conexão com o banco!");
 		}
-
 	}
 
-	public void initBD() {
+	public static void initBD() {
 		try {
 			conexao = getConexao();
 			Statement stm = conexao.createStatement();
