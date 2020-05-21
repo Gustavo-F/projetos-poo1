@@ -61,5 +61,12 @@ public class UtilBD {
 			System.err.println("Não consegui criar o banco!");
 		}
 	}
-
+	
+	public static void alterarBD(String sql) throws SQLException {
+		Connection bd = UtilBD.getConexao();
+		Statement stm = bd.createStatement();
+		stm.executeUpdate(sql);
+		System.out.println("Executei: " + sql);
+		stm.close();
+	}
 }
