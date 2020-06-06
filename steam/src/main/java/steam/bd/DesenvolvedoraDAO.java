@@ -6,12 +6,11 @@ import steam.entidades.Desenvolvedora;
 
 public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 
-	public void adicionar(Desenvolvedora referencia) {
+	public void adicionar(Desenvolvedora desenvolvedora) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	public void remover(Desenvolvedora referencia) {
+	public void remover(Desenvolvedora desenvolvedora) {
 		// TODO Auto-generated method stub
 
 	}

@@ -13,6 +13,7 @@ public class Main {
 		Genero teste = new Genero("Teste");
 		dao.adicionar(teste);
 		dao.remover(teste);
+		
 		UtilBD.fecharConexao();
 	}
 

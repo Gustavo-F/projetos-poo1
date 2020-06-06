@@ -5,15 +5,16 @@ import java.util.ArrayList;
 public class Jogador extends Pessoa {
 	private String apelido;
 	private ArrayList<Pessoa> amigos;
+	private ArrayList<Jogo> jogos;
 
 	// para criar um jogador, sou obrigado a passar o nome, o e-mail e o apelido
 	public Jogador(String nome, String email, String apelido) {
 		super(nome, email); // chamo o método construtor da classe mãe Pessoa
 		this.apelido = apelido;
 		this.amigos = new ArrayList<Pessoa>(); // apenas crio a instância da lista de amigos (a lista inicia vazia)
+		this.jogos = new ArrayList<Jogo>();
 	}
 
-	@Override
 	public void adicionaJogo(Jogo jogo) {
 		for (int indice = 0; indice < jogos.size(); indice++)
 			if (jogos.get(indice).getNome().contentEquals(jogo.getNome()))
@@ -26,7 +27,6 @@ public class Jogador extends Pessoa {
 		jogo.getDesenvolvedora().adicionaCliente(this);
 	}
 
-	@Override
 	public void removeJogo(Jogo jogo) {
 		for (int indice = 0; indice < jogos.size(); indice++) {
 			if (jogos.get(indice).getNome().contentEquals(jogo.getNome())) {
@@ -37,6 +37,10 @@ public class Jogador extends Pessoa {
 				return;
 			}
 		}
+	}
+
+	public ArrayList<Jogo> getJogos() {
+		return jogos;
 	}
 
 	/**
@@ -82,10 +86,10 @@ public class Jogador extends Pessoa {
 //	public void imprime() {
 //		System.out.println("Impressão da classe Jogador");
 //	}
-	
+
 	@Override
 	public void imprimeAbstrato() {
-		System.out.println("Impressão concreta da classe jogadora.");		
+		System.out.println("Impressão concreta da classe jogadora.");
 	}
 
 }
