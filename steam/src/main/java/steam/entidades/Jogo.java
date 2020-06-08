@@ -1,6 +1,7 @@
 package steam.entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Jogo {
 	private String nome;
@@ -10,7 +11,7 @@ public class Jogo {
 	 * Para adicionar um elementos utilizamos o método add() e para remover o método
 	 * remove(). O tipo do objeto que será armazenado é indicado dentro do < >.
 	 */
-	private ArrayList<Genero> generos;
+	private List<Genero> generos;
 	private Desenvolvedora desenvolvedora;
 
 	/**
@@ -47,6 +48,14 @@ public class Jogo {
 		this.generos = new ArrayList<Genero>(); // crio um objeto do tipo ArrayList, que armazenará objetos do tipo
 		// Genero.
 	}
+	
+	public Jogo(String nome, Desenvolvedora desenvolvedora, double preco, List<Genero> generos) {
+		super();
+		this.nome = nome;
+		this.preco = preco;
+		this.desenvolvedora = desenvolvedora;
+		this.generos = generos;
+	}
 
 	public void adicionaGenero(Genero genero) {
 		// Primeiro, busco na lista de generos se este genero já foi adicionado.
@@ -77,7 +86,7 @@ public class Jogo {
 		}
 	}
 
-	public ArrayList<Genero> getGeneros() {
+	public List<Genero> getGeneros() {
 		return generos;
 	}
 

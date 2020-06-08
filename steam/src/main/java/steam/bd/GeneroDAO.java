@@ -1,6 +1,8 @@
 package steam.bd;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import steam.entidades.Genero;
@@ -21,13 +23,37 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			String sql = "DELETE FROM Genero WHERE nome = '" + genero.getNome() + "'";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível remover o genero no banco!");
+			System.err.println("Não foi possível remover o genero do banco!");
 		}
 	}
 
 	public List<Genero> todos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Genero> retorno = new ArrayList<Genero>();
+		try {
+			String sql = "SELECT Nome FROM Genero";
+			ResultSet resultSet = UtilBD.consultarBD(sql);
+			while (resultSet.next()) {
+				String nome = resultSet.getString("Nome");
+				retorno.add(new Genero(nome));
+			}
+		} catch (SQLException e) {
+			System.err.println("Não foi possível consultar todos os generos do banco!");
+		}
+		return retorno;
+	}
+
+	public Genero get(String nome) {
+		Genero retorno = null;
+		try {
+			String sql = "SELECT Nome FROM Genero WHERE Nome = '" + nome + "'";
+			ResultSet resultSet = UtilBD.consultarBD(sql);
+			while (resultSet.next()) {
+				retorno = new Genero(nome);
+			}
+		} catch (SQLException e) {
+			System.err.println("Não foi possível consultar um genero do banco!");
+		}
+		return retorno;
 	}
 
 }

@@ -2,6 +2,7 @@ package steam.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -64,7 +65,8 @@ public class UtilBD {
 	private static void criarGeneroJogo(Statement stm) throws SQLException {
 		stm.executeUpdate("DROP TABLE IF EXISTS GeneroJogo");
 		stm.executeUpdate("CREATE TABLE GeneroJogo (NomeGenero varchar(10) NOT NULL," + "NomeJogo varchar(10) NOT NULL,"
-				+ "FOREIGN KEY (NomeGenero) REFERENCES Genero(Nome)," + "FOREIGN KEY (NomeJogo) REFERENCES Jogo(Nome),"
+				+ "FOREIGN KEY (NomeGenero) REFERENCES Genero(Nome) ON DELETE CASCADE,"
+				+ "FOREIGN KEY (NomeJogo) REFERENCES Jogo(Nome) ON DELETE CASCADE,"
 				+ "CONSTRAINT PK_GENERO_JOGO PRIMARY KEY (NomeGenero,NomeJogo));");
 		stm.executeUpdate("INSERT INTO GeneroJogo VALUES ('FPS','Counter Strike')");
 		stm.executeUpdate("INSERT INTO GeneroJogo VALUES ('Ação','Counter Strike')");
@@ -77,7 +79,7 @@ public class UtilBD {
 		stm.executeUpdate("DROP TABLE IF EXISTS Jogo");
 		stm.executeUpdate("CREATE TABLE Jogo (Nome varchar(10) NOT NULL PRIMARY KEY,"
 				+ "Preco double NOT NULL, Desenvolvedora varchar(10) NOT NULL,"
-				+ "FOREIGN KEY (Desenvolvedora) REFERENCES Desenvolvedora(Nome));");
+				+ "FOREIGN KEY (Desenvolvedora) REFERENCES Desenvolvedora(Nome) ON DELETE CASCADE);");
 		stm.executeUpdate("INSERT INTO Jogo VALUES ('Counter Strike', 10, 'Valve')");
 		stm.executeUpdate("INSERT INTO Jogo VALUES ('GTA', 15, 'Rockstar')");
 		stm.executeUpdate("INSERT INTO Jogo VALUES ('Age of Empires', 20, 'Microsoft')");
@@ -106,5 +108,11 @@ public class UtilBD {
 		stm.executeUpdate(sql);
 		System.out.println("Executei: " + sql);
 		stm.close();
+	}
+
+	public static ResultSet consultarBD(String sql) throws SQLException {
+		Connection bd = UtilBD.getConexao();
+		Statement stm = bd.createStatement();
+		return stm.executeQuery(sql);
 	}
 }

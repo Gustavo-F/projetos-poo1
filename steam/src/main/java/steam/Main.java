@@ -10,10 +10,9 @@ public class Main {
 		UtilBD.initBD();
 
 		GeneroDAO dao = new GeneroDAO();
-		Genero teste = new Genero("Teste");
-		dao.adicionar(teste);
-		dao.remover(teste);
-		
+		for (Genero gen : dao.todos())
+			System.out.println(gen.getNome());
+		System.out.println(dao.get("Estratégia").getNome());
 		UtilBD.fecharConexao();
 	}
 
