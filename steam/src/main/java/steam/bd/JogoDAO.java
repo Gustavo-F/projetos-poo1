@@ -42,9 +42,9 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			while (resultSet.next()) {
 				String nome = resultSet.getString("Nome");
 				Double preco = resultSet.getDouble("Preco");
-				String desenvolvedora = resultSet.getString("Desenvolvedora");
-				List<Genero> generosJogo = getGenerosJogo(nome);
-				retorno.add(new Jogo(nome, new DesenvolvedoraDAO().get(desenvolvedora), preco, generosJogo));
+				String nomeDesenvolvedora = resultSet.getString("Desenvolvedora");
+				retorno.add(
+						new Jogo(nome, new DesenvolvedoraDAO().get(nomeDesenvolvedora), preco, getGenerosJogo(nome)));
 			}
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar todos os jogos do banco!");
@@ -59,9 +59,8 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			ResultSet resultSet = UtilBD.consultarBD(sql);
 			while (resultSet.next()) {
 				Double preco = resultSet.getDouble("Preco");
-				String desenvolvedora = resultSet.getString("Desenvolvedora");
-				List<Genero> generosJogo = getGenerosJogo(nome);
-				retorno = new Jogo(nome, new DesenvolvedoraDAO().get(desenvolvedora), preco, generosJogo);
+				String nomeDesenvolvedora = resultSet.getString("Desenvolvedora");
+				retorno = new Jogo(nome, new DesenvolvedoraDAO().get(nomeDesenvolvedora), preco, getGenerosJogo(nome));
 			}
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar um jogo do banco!");

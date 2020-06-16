@@ -113,6 +113,9 @@ public class UtilBD {
 	public static ResultSet consultarBD(String sql) throws SQLException {
 		Connection bd = UtilBD.getConexao();
 		Statement stm = bd.createStatement();
-		return stm.executeQuery(sql);
+		ResultSet retorno = stm.executeQuery(sql);
+		System.out.println("Executei: " + sql);
+		stm.close();
+		return retorno;
 	}
 }
