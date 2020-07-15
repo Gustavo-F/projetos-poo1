@@ -1,18 +1,16 @@
 package steam;
 
-import steam.bd.GeneroDAO;
+import javafx.application.Application;
 import steam.bd.UtilBD;
-import steam.entidades.Genero;
+import steam.ihc.LoginFX;
 
 public class Main {
 
 	public static void main(String[] args) {
 		UtilBD.initBD();
 
-		GeneroDAO dao = new GeneroDAO();
-		for (Genero gen : dao.todos())
-			System.out.println(gen.getNome());
-		System.out.println(dao.get("Estratégia").getNome());
+		Application.launch(LoginFX.class);
+		
 		UtilBD.fecharConexao();
 	}
 
