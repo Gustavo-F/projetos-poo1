@@ -8,8 +8,8 @@ public class Jogador extends Pessoa {
 	private ArrayList<Jogo> jogos;
 
 	// para criar um jogador, sou obrigado a passar o nome, o e-mail e o apelido
-	public Jogador(String nome, String email, String apelido) {
-		super(nome, email); // chamo o método construtor da classe mãe Pessoa
+	public Jogador(String nome, String email, String senha, String apelido) {
+		super(nome, email, senha); // chamo o método construtor da classe mãe Pessoa
 		this.apelido = apelido;
 		this.amigos = new ArrayList<Pessoa>(); // apenas crio a instância da lista de amigos (a lista inicia vazia)
 		this.jogos = new ArrayList<Jogo>();
@@ -91,5 +91,4 @@ public class Jogador extends Pessoa {
 	public void imprimeAbstrato() {
 		System.out.println("Impressão concreta da classe jogadora.");
 	}
-
 }

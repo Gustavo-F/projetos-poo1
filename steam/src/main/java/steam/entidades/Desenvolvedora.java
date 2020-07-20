@@ -8,8 +8,8 @@ public class Desenvolvedora extends Pessoa {
 	// da desenvolvedora
 	private ArrayList<Jogador> clientes;
 
-	public Desenvolvedora(String nome, String email) {
-		super(nome, email);
+	public Desenvolvedora(String nome, String email, String senha) {
+		super(nome, email, senha);
 		clientes = new ArrayList<Jogador>();
 	}
 
@@ -33,7 +33,7 @@ public class Desenvolvedora extends Pessoa {
 	public ArrayList<Jogador> getClientes() {
 		return clientes;
 	}
-	
+
 //	@Override
 //	public void imprime() {
 //		System.out.println("Impressão da classe Desenvolvedora");
@@ -41,6 +41,6 @@ public class Desenvolvedora extends Pessoa {
 
 	@Override
 	public void imprimeAbstrato() {
-		System.out.println("Impressão concreta da classe desenvolvedora.");		
+		System.out.println("Impressão concreta da classe desenvolvedora.");
 	}
 }

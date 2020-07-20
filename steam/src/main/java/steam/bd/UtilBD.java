@@ -56,10 +56,18 @@ public class UtilBD {
 			criarDesenvolvedora(stm);
 			criarJogo(stm);
 			criarGeneroJogo(stm);
+			criarJogador(stm);
 			stm.close();
 		} catch (SQLException e) {
 			System.err.println("Não consegui criar o banco!");
 		}
+	}
+
+	private static void criarJogador(Statement stm) throws SQLException {
+		stm.executeUpdate("DROP TABLE IF EXISTS Jogador");
+		stm.executeUpdate(
+				"CREATE TABLE Jogador (Nome varchar(10) NOT NULL PRIMARY KEY, Email varchar(50) NOT NULL, Senha varchar(50) NOT NULL, Apelido varchar(30) NOT NULL);");
+		stm.executeUpdate("INSERT INTO Jogador VALUES ('admin','admin@gmail.com','admin','admin')");
 	}
 
 	private static void criarGeneroJogo(Statement stm) throws SQLException {
@@ -87,11 +95,11 @@ public class UtilBD {
 
 	private static void criarDesenvolvedora(Statement stm) throws SQLException {
 		stm.executeUpdate("DROP TABLE IF EXISTS Desenvolvedora");
-		stm.executeUpdate(
-				"CREATE TABLE Desenvolvedora (Nome varchar(10) NOT NULL PRIMARY KEY," + "Email varchar(10) NOT NULL);");
-		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Valve','contato@valve.com')");
-		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Rockstar','contato@rockstar.com')");
-		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Microsoft','contato@microsoft.com')");
+		stm.executeUpdate("CREATE TABLE Desenvolvedora (Nome varchar(10) NOT NULL PRIMARY KEY,"
+				+ "Email varchar(10) NOT NULL, Senha varchar(50) NOT NULL);");
+		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Valve','contato@valve.com', 'valve')");
+		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Rockstar','contato@rockstar.com', 'rockstar')");
+		stm.executeUpdate("INSERT INTO Desenvolvedora VALUES ('Microsoft','contato@microsoft.com', 'microsoft')");
 	}
 
 	private static void criarGenero(Statement stm) throws SQLException {
