@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class LoginFX extends Application {
 
+	private Stage stage;
 	private Label lblSteam;
 	private TextField txtUsuario;
 	private PasswordField txtSenha;
@@ -27,9 +28,9 @@ public class LoginFX extends Application {
 	public void start(Stage stage) { // o palco vem por parâmetro
 
 		// ATENÇÃO: SEMPRE IMPORTAR OS COMPONENTES DO PACOTE JAVAFX!!!
-
+		this.stage = stage;
 		initComponentes();
-		configLayout(stage);
+		configLayout();
 
 		Scene scene = new Scene(pane);
 		btnEntrar.requestFocus(); // precisa ser depois de inicializar a cena
@@ -40,7 +41,7 @@ public class LoginFX extends Application {
 		stage.show();
 	}
 
-	private void configLayout(Stage stage) {
+	private void configLayout() {
 		lblSteam.setLayoutX(10);
 		lblSteam.setLayoutY(10);
 
@@ -58,7 +59,7 @@ public class LoginFX extends Application {
 		btnEntrar.setLayoutY(115);
 		btnEntrar.setPrefHeight(20);
 		btnEntrar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
-		btnEntrar.setOnAction(login(stage));
+		btnEntrar.setOnAction(login());
 
 		btnSair.setLayoutX(btnEntrar.getPrefWidth() + 20);
 		btnSair.setLayoutY(115);
@@ -93,7 +94,7 @@ public class LoginFX extends Application {
 		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
 	}
 
-	private EventHandler<ActionEvent> login(Stage stage) {
+	private EventHandler<ActionEvent> login() {
 		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -128,7 +129,7 @@ public class LoginFX extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					new CadastrarJogadorFX().start(new Stage());
+					new CadastrarJogadorFX().start(stage);
 				} catch (Exception e) {
 					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
 				}
