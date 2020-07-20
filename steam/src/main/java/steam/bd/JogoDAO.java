@@ -46,6 +46,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 				retorno.add(
 						new Jogo(nome, new DesenvolvedoraDAO().get(nomeDesenvolvedora), preco, getGenerosJogo(nome)));
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar todos os jogos do banco!");
 		}
@@ -62,6 +63,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 				String nomeDesenvolvedora = resultSet.getString("Desenvolvedora");
 				retorno = new Jogo(nome, new DesenvolvedoraDAO().get(nomeDesenvolvedora), preco, getGenerosJogo(nome));
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar um jogo do banco!");
 		}
@@ -74,6 +76,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 		ResultSet resultSetGenerosJogo = UtilBD.consultarBD(sqlGenerosJogo);
 		while (resultSetGenerosJogo.next())
 			generosJogo.add(new Genero(resultSetGenerosJogo.getString("NomeGenero")));
+		resultSetGenerosJogo.getStatement().close();
 		return generosJogo;
 	}
 }

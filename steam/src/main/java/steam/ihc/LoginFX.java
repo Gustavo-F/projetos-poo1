@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import steam.bd.JogadorDAO;
+import steam.entidades.Jogador;
 
 public class LoginFX extends Application {
 
@@ -107,6 +109,19 @@ public class LoginFX extends Application {
 						System.err.println("Senha em branco!");
 						return;
 					}
+
+					Jogador usuarioBD = new JogadorDAO().get(txtUsuario.getText());
+
+					if (usuarioBD == null) {
+						System.err.println("Usuário ou senha inválidos!");
+						return;
+					}
+
+					if (!usuarioBD.getSenha().contentEquals(txtSenha.getText())) {
+						System.err.println("Usuário ou senha inválidos!");
+						return;
+					}
+
 					new MainFX(txtUsuario.getText()).start(stage);
 				} catch (Exception e) {
 					System.err.println("Não foi possível iniciar a tela principal!");

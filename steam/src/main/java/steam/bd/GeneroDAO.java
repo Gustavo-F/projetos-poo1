@@ -36,6 +36,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 				String nome = resultSet.getString("Nome");
 				retorno.add(new Genero(nome));
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar todos os generos do banco!");
 		}
@@ -50,6 +51,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			while (resultSet.next()) {
 				retorno = new Genero(nome);
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar um genero do banco!");
 		}

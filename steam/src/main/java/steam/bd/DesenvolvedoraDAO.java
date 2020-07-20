@@ -40,6 +40,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 				String senha = resultSet.getString("Senha");
 				retorno.add(new Desenvolvedora(nome, email, senha));
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar todas as desenvolvedoras do banco!");
 		}
@@ -56,6 +57,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 				String senha = resultSet.getString("Senha");
 				retorno = new Desenvolvedora(nome, email, senha);
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar uma desenvolvedora do banco!");
 		}

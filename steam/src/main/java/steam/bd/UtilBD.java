@@ -123,7 +123,7 @@ public class UtilBD {
 		Statement stm = bd.createStatement();
 		ResultSet retorno = stm.executeQuery(sql);
 		System.out.println("Executei: " + sql);
-		stm.close();
+//		stm.close();
 		return retorno;
 	}
 }

@@ -40,6 +40,7 @@ public class JogadorDAO implements InterfaceDAO<Jogador> {
 				String apelido = resultSet.getString("Apelido");
 				retorno.add(new Jogador(nome, email, senha, apelido));
 			}
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar todos os jogadores do banco!");
 		}
@@ -49,7 +50,7 @@ public class JogadorDAO implements InterfaceDAO<Jogador> {
 	public Jogador get(String nome) {
 		Jogador retorno = null;
 		try {
-			String sql = "SELECT Email, Senha FROM Jogador WHERE Nome = '" + nome + "'";
+			String sql = "SELECT Email, Senha, Apelido FROM Jogador WHERE Nome = '" + nome + "'";
 			ResultSet resultSet = UtilBD.consultarBD(sql);
 			while (resultSet.next()) {
 				String email = resultSet.getString("Email");
@@ -57,6 +58,8 @@ public class JogadorDAO implements InterfaceDAO<Jogador> {
 				String apelido = resultSet.getString("Apelido");
 				retorno = new Jogador(nome, email, senha, apelido);
 			}
+			// PRECISO FECHAR O STATEMENT SÓ DEPOIS!
+			resultSet.getStatement().close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível consultar um jogador do banco!");
 		}
