@@ -96,7 +96,15 @@ public class LoginFX extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					new MainFX(txtUsuario.getText()).start(new Stage());
+					if (txtUsuario.getText().isBlank()){
+						System.err.println("Usuário em branco!");
+						return;
+					}
+					if (txtSenha.getText().isBlank()){
+						System.err.println("Senha em branco!");
+						return;
+					}
+					new MainFX(txtUsuario.getText()).start(stage);
 				} catch (Exception e) {
 					System.err.println("Não foi possível iniciar a tela principal!");
 				}

@@ -11,7 +11,6 @@ public class MainFX extends Application {
 	private String usuarioLogado;
 
 	public MainFX(String usuarioLogado) {
-		super();
 		if (usuarioLogado.isBlank())
 			usuarioLogado = "Erro - Nome de usuário em branco!";
 		this.usuarioLogado = usuarioLogado;
@@ -23,6 +22,7 @@ public class MainFX extends Application {
 		pane.setPrefSize(640, 480);
 
 		Scene scene = new Scene(pane);
+		
 		stage.setScene(scene);
 		stage.setTitle("Steam de " + usuarioLogado);
 		stage.setResizable(false);

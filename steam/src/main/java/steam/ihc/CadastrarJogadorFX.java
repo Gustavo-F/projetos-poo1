@@ -14,8 +14,9 @@ public class CadastrarJogadorFX extends Application {
 		pane.setPrefSize(320, 240);
 		
 		Scene scene = new Scene(pane);
+		
 		stage.setScene(scene);
-		stage.setTitle("Registor de novo jogador");
+		stage.setTitle("Registro de um novo jogador");
 		stage.setResizable(false);
 		stage.show();
 	}
