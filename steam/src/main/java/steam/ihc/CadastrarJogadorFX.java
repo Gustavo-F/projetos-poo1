@@ -6,23 +6,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MainFX extends Application {
-
-	private String usuarioLogado;
-
-	public MainFX(String usuarioLogado) {
-		super();
-		this.usuarioLogado = usuarioLogado;
-	}
+public class CadastrarJogadorFX extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		Pane pane = new AnchorPane();
-		pane.setPrefSize(640, 480);
-
+		pane.setPrefSize(320, 240);
+		
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
-		stage.setTitle("Steam de " + usuarioLogado);
+		stage.setTitle("Registor de novo jogador");
 		stage.setResizable(false);
 		stage.show();
 	}
