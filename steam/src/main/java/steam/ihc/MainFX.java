@@ -12,6 +12,8 @@ public class MainFX extends Application {
 
 	public MainFX(String usuarioLogado) {
 		super();
+		if (usuarioLogado.isBlank())
+			usuarioLogado = "Erro - Nome de usuário em branco!";
 		this.usuarioLogado = usuarioLogado;
 	}
 
