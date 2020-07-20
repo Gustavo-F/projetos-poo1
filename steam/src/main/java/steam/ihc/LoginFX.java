@@ -15,36 +15,32 @@ import javafx.stage.Stage;
 
 public class LoginFX extends Application {
 
+	private Label lblSteam;
+	private TextField txtUsuario;
+	private PasswordField txtSenha;
+	private Button btnEntrar;
+	private Button btnSair;
+	private Button btnCadastrar;
+	private Pane pane;
+
 	@Override
 	public void start(Stage stage) { // o palco vem por parâmetro
 
 		// ATENÇÃO: SEMPRE IMPORTAR OS COMPONENTES DO PACOTE JAVAFX!!!
 
-		// rótulos
-		Label lblSteam = new Label("Bem-vindo à Steam");
+		initComponentes();
+		configLayout(stage);
 
-		// entrada de textos
-		TextField txtUsuario = new TextField();
-		txtUsuario.setPromptText("Digite aqui seu usuário");
+		Scene scene = new Scene(pane);
+		btnEntrar.requestFocus(); // precisa ser depois de inicializar a cena
 
-		// entrada de senhas
-		PasswordField txtSenha = new PasswordField();
-		txtSenha.setPromptText("Digite aqui sua senha");
+		stage.setScene(scene);
+		stage.setTitle("Steam login");
+		stage.setResizable(false);
+		stage.show();
+	}
 
-		// botões
-		Button btnEntrar = new Button("Entrar");
-		Button btnSair = new Button("Sair");
-		Button btnCadastrar = new Button("Registrar nova conta");
-
-		// painel
-		Pane pane = new AnchorPane();
-		pane.setPrefSize(320, 180);
-
-		// adicionando os componentes no painel
-		pane.getChildren().add(lblSteam); // um a um
-		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
-
-		// configurando os componentes no painel
+	private void configLayout(Stage stage) {
 		lblSteam.setLayoutX(10);
 		lblSteam.setLayoutY(10);
 
@@ -62,45 +58,51 @@ public class LoginFX extends Application {
 		btnEntrar.setLayoutY(115);
 		btnEntrar.setPrefHeight(20);
 		btnEntrar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
+		btnEntrar.setOnAction(login(stage));
 
 		btnSair.setLayoutX(btnEntrar.getPrefWidth() + 20);
 		btnSair.setLayoutY(115);
 		btnSair.setPrefHeight(20);
 		btnSair.setPrefWidth((pane.getPrefWidth() - 30) / 2);
+		btnSair.setOnAction(sair());
 
 		btnCadastrar.setLayoutX(10);
 		btnCadastrar.setLayoutY(145);
 		btnCadastrar.setPrefHeight(20);
 		btnCadastrar.setPrefWidth(pane.getPrefWidth() - 20);
+		btnCadastrar.setOnAction(abrirJanelaCadastro());
+	}
 
-		// comportamento
-		btnCadastrar.setOnAction(new EventHandler<ActionEvent>() {
+	private void initComponentes() {
+		lblSteam = new Label("Bem-vindo à Steam");
+
+		txtUsuario = new TextField();
+		txtUsuario.setPromptText("Digite aqui seu usuário");
+
+		txtSenha = new PasswordField();
+		txtSenha.setPromptText("Digite aqui sua senha");
+
+		btnEntrar = new Button("Entrar");
+		btnSair = new Button("Sair");
+		btnCadastrar = new Button("Registrar nova conta");
+
+		pane = new AnchorPane();
+		pane.setPrefSize(320, 180);
+
+		pane.getChildren().add(lblSteam); // um a um
+		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
+	}
+
+	private EventHandler<ActionEvent> login(Stage stage) {
+		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					new CadastrarJogadorFX().start(new Stage());
-				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
-				}
-			}
-		});
-
-		btnSair.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Platform.exit();
-			}
-		});
-
-		btnEntrar.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					if (txtUsuario.getText().isBlank()){
+					if (txtUsuario.getText().isBlank()) {
 						System.err.println("Usuário em branco!");
 						return;
 					}
-					if (txtSenha.getText().isBlank()){
+					if (txtSenha.getText().isBlank()) {
 						System.err.println("Senha em branco!");
 						return;
 					}
@@ -109,16 +111,28 @@ public class LoginFX extends Application {
 					System.err.println("Não foi possível iniciar a tela principal!");
 				}
 			}
-		});
+		};
+	}
 
-		// cena
-		Scene scene = new Scene(pane);
-		btnEntrar.requestFocus(); // precisa ser depois de inicializar a cena
+	private EventHandler<ActionEvent> sair() {
+		return new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Platform.exit();
+			}
+		};
+	}
 
-		// palco
-		stage.setScene(scene);
-		stage.setTitle("Steam login");
-		stage.setResizable(false);
-		stage.show();
+	private EventHandler<ActionEvent> abrirJanelaCadastro() {
+		return new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					new CadastrarJogadorFX().start(new Stage());
+				} catch (Exception e) {
+					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
+				}
+			}
+		};
 	}
 }
