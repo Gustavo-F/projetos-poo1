@@ -7,6 +7,7 @@ import java.util.List;
 
 import steam.entidades.Genero;
 import steam.entidades.Jogo;
+import steam.ihc.AlertaFX;
 
 public class JogoDAO implements InterfaceDAO<Jogo> {
 
@@ -21,7 +22,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 				UtilBD.alterarBD(sql);
 			}
 		} catch (SQLException e) {
-			System.err.println("Não foi possível inserir o jogo no banco!");
+			AlertaFX.erro("Não foi possível inserir o jogo no banco!");
 		}
 	}
 
@@ -30,7 +31,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			String sql = "DELETE FROM Jogo WHERE nome = '" + jogo.getNome() + "'";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível remover o jogo do banco!");
+			AlertaFX.erro("Não foi possível remover o jogo do banco!");
 		}
 	}
 
@@ -48,7 +49,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar todos os jogos do banco!");
+			AlertaFX.erro("Não foi possível consultar todos os jogos do banco!");
 		}
 		return retorno;
 	}
@@ -65,7 +66,7 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar um jogo do banco!");
+			AlertaFX.erro("Não foi possível consultar um jogo do banco!");
 		}
 		return retorno;
 	}

@@ -54,10 +54,10 @@ public class LoginFX extends Application {
 
 		btnEntrar = new Button("Entrar");
 		btnEntrar.setOnAction(entrar());
-		
+
 		btnSair = new Button("Sair");
 		btnSair.setOnAction(sair());
-		
+
 		btnCadastrar = new Button("Registrar nova conta");
 		btnCadastrar.setOnAction(abrirJanelaCadastro());
 
@@ -104,29 +104,29 @@ public class LoginFX extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					if (txtUsuario.getText().isBlank()) {
-						System.err.println("Usuário em branco!");
+						AlertaFX.alerta("Usuário em branco!");
 						return;
 					}
 					if (txtSenha.getText().isBlank()) {
-						System.err.println("Senha em branco!");
+						AlertaFX.alerta("Senha em branco!");
 						return;
 					}
 
 					Jogador usuarioBD = new JogadorDAO().get(txtUsuario.getText());
 
 					if (usuarioBD == null) {
-						System.err.println("Usuário ou senha inválidos!");
+						AlertaFX.alerta("Usuário ou senha inválidos!");
 						return;
 					}
 
 					if (!usuarioBD.getSenha().contentEquals(txtSenha.getText())) {
-						System.err.println("Usuário ou senha inválidos!");
+						AlertaFX.alerta("Usuário ou senha inválidos!");
 						return;
 					}
 
 					new MainFX(txtUsuario.getText()).start(stage);
 				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela principal!");
+					AlertaFX.erro("Não foi possível iniciar a tela principal!");
 				}
 			}
 		};
@@ -148,7 +148,7 @@ public class LoginFX extends Application {
 				try {
 					new CadastrarJogadorFX().start(stage);
 				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
+					AlertaFX.erro("Não foi possível iniciar a tela de cadastro de jogador!");
 				}
 			}
 		};

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import steam.entidades.Desenvolvedora;
+import steam.ihc.AlertaFX;
 
 public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 
@@ -15,7 +16,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 					+ desenvolvedora.getEmail() + "','" + desenvolvedora.getSenha() + "')";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível inserir a desenvolvedora no banco!");
+			AlertaFX.erro("Não foi possível inserir a desenvolvedora no banco!");
 		}
 	}
 
@@ -24,7 +25,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 			String sql = "DELETE FROM Desenvolvedora WHERE nome = '" + desenvolvedora.getNome() + "'";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível remover a desenvolvedora do banco!");
+			AlertaFX.erro("Não foi possível remover a desenvolvedora do banco!");
 		}
 
 	}
@@ -42,7 +43,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar todas as desenvolvedoras do banco!");
+			AlertaFX.erro("Não foi possível consultar todas as desenvolvedoras do banco!");
 		}
 		return retorno;
 	}
@@ -59,7 +60,7 @@ public class DesenvolvedoraDAO implements InterfaceDAO<Desenvolvedora> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar uma desenvolvedora do banco!");
+			AlertaFX.erro("Não foi possível consultar uma desenvolvedora do banco!");
 		}
 		return retorno;
 	}

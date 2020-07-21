@@ -60,7 +60,7 @@ public class CadastrarJogadorFX extends Application {
 
 		btnCadastrar = new Button("Cadastrar");
 		btnCadastrar.setOnAction(cadastrar());
-		
+
 		btnVoltar = new Button("Voltar");
 		btnVoltar.setOnAction(voltar());
 
@@ -111,11 +111,7 @@ public class CadastrarJogadorFX extends Application {
 		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				try {
-					new LoginFX().start(stage);
-				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de login!");
-				}
+				abrirJanelaLogin();
 			}
 		};
 	}
@@ -125,41 +121,45 @@ public class CadastrarJogadorFX extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				if (txtUsuario.getText().isBlank()) {
-					System.err.println("Usuário em branco!");
+					AlertaFX.alerta("Usuário em branco!");
 					return;
 				}
 				if (txtEmail.getText().isBlank()) {
-					System.err.println("E-mail em branco!");
+					AlertaFX.alerta("E-mail em branco!");
 					return;
 				}
 				if (txtSenha1.getText().isBlank()) {
-					System.err.println("Senha em branco!");
+					AlertaFX.alerta("Senha em branco!");
 					return;
 				}
 				if (txtSenha2.getText().isBlank()) {
-					System.err.println("Confirmação da senha em branco!");
+					AlertaFX.alerta("Confirmação da senha em branco!");
 					return;
 				}
 				if (!txtSenha1.getText().contentEquals(txtSenha2.getText())) {
-					System.err.println("Confirmação da senha difere da senha!");
+					AlertaFX.alerta("Confirmação da senha difere da senha!");
 					return;
 				}
 				if (txtApelido.getText().isBlank()) {
-					System.err.println("Apelido em branco!");
+					AlertaFX.alerta("Apelido em branco!");
 					return;
 				}
 
 				new JogadorDAO().adicionar(new Jogador(txtUsuario.getText(), txtEmail.getText(), txtSenha1.getText(),
 						txtApelido.getText()));
 
-				System.out.println("Usuário cadastrado com sucesso :)");
+				AlertaFX.info("Usuário cadastrado com sucesso :)");
 
-				try {
-					new LoginFX().start(stage);
-				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de login!");
-				}
+				abrirJanelaLogin();
 			}
 		};
+	}
+
+	private void abrirJanelaLogin() {
+		try {
+			new LoginFX().start(stage);
+		} catch (Exception e) {
+			AlertaFX.erro("Não foi possível iniciar a tela de login!");
+		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import steam.entidades.Genero;
+import steam.ihc.AlertaFX;
 
 public class GeneroDAO implements InterfaceDAO<Genero> {
 
@@ -14,7 +15,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			String sql = "INSERT INTO Genero VALUES ('" + genero.getNome() + "')";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível inserir o genero no banco!");
+			AlertaFX.erro("Não foi possível inserir o genero no banco!");
 		}
 	}
 
@@ -23,7 +24,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			String sql = "DELETE FROM Genero WHERE nome = '" + genero.getNome() + "'";
 			UtilBD.alterarBD(sql);
 		} catch (SQLException e) {
-			System.err.println("Não foi possível remover o genero do banco!");
+			AlertaFX.erro("Não foi possível remover o genero do banco!");
 		}
 	}
 
@@ -38,7 +39,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar todos os generos do banco!");
+			AlertaFX.erro("Não foi possível consultar todos os generos do banco!");
 		}
 		return retorno;
 	}
@@ -53,7 +54,7 @@ public class GeneroDAO implements InterfaceDAO<Genero> {
 			}
 			resultSet.getStatement().close();
 		} catch (SQLException e) {
-			System.err.println("Não foi possível consultar um genero do banco!");
+			AlertaFX.erro("Não foi possível consultar um genero do banco!");
 		}
 		return retorno;
 	}

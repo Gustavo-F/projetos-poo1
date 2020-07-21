@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import steam.ihc.AlertaFX;
+
 public class UtilBD {
 	private static Connection conexao;
 
@@ -19,7 +21,7 @@ public class UtilBD {
 				abrirConexao();
 
 		} catch (SQLException e) {
-			System.err.println("Não consegui abrir a conexão com o banco!");
+			AlertaFX.erro("Não consegui abrir a conexão com o banco!");
 		}
 
 		return conexao;
@@ -30,9 +32,9 @@ public class UtilBD {
 			Class.forName("org.sqlite.JDBC");
 			conexao = DriverManager.getConnection("jdbc:sqlite:banco.sqlite");
 		} catch (SQLException e) {
-			System.err.println("Não consegui abrir a conexão com o banco!");
+			AlertaFX.erro("Não consegui abrir a conexão com o banco!");
 		} catch (ClassNotFoundException e2) {
-			System.err.println("A biblioteca do SQLite não está funcionando corretamente!");
+			AlertaFX.erro("A biblioteca do SQLite não está funcionando corretamente!");
 		}
 	}
 
@@ -44,7 +46,7 @@ public class UtilBD {
 			if (!conexao.isClosed())
 				conexao.close();
 		} catch (SQLException e) {
-			System.err.println("Não consegui fechar a conexão com o banco!");
+			AlertaFX.erro("Não consegui fechar a conexão com o banco!");
 		}
 	}
 
@@ -59,7 +61,7 @@ public class UtilBD {
 			criarJogador(stm);
 			stm.close();
 		} catch (SQLException e) {
-			System.err.println("Não consegui criar o banco!");
+			AlertaFX.erro("Não consegui criar o banco!");
 		}
 	}
 

@@ -64,7 +64,7 @@ public class MainFX extends Application {
 				try {
 					new LoginFX().start(stage);
 				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de login");
+					AlertaFX.erro("Não foi possível iniciar a tela de login");
 				}
 			}
 		};
