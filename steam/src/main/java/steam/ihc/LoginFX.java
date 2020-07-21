@@ -53,7 +53,7 @@ public class LoginFX extends Application {
 		txtSenha.setPromptText("Digite aqui sua senha");
 
 		btnEntrar = new Button("Entrar");
-		btnEntrar.setOnAction(login());
+		btnEntrar.setOnAction(entrar());
 		
 		btnSair = new Button("Sair");
 		btnSair.setOnAction(sair());
@@ -98,7 +98,7 @@ public class LoginFX extends Application {
 		btnCadastrar.setPrefWidth(pane.getPrefWidth() - 20);
 	}
 
-	private EventHandler<ActionEvent> login() {
+	private EventHandler<ActionEvent> entrar() {
 		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
