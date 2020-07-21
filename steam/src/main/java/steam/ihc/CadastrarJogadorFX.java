@@ -59,7 +59,10 @@ public class CadastrarJogadorFX extends Application {
 		txtApelido.setPromptText("Digite aqui seu apelido");
 
 		btnCadastrar = new Button("Cadastrar");
+		btnCadastrar.setOnAction(cadastrar());
+		
 		btnVoltar = new Button("Voltar");
+		btnVoltar.setOnAction(voltar());
 
 		pane = new AnchorPane();
 		pane.setPrefSize(320, 245);
@@ -97,13 +100,11 @@ public class CadastrarJogadorFX extends Application {
 		btnCadastrar.setLayoutY(210);
 		btnCadastrar.setPrefHeight(20);
 		btnCadastrar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
-		btnCadastrar.setOnAction(cadastrar());
 
 		btnVoltar.setLayoutX(btnCadastrar.getPrefWidth() + 20);
 		btnVoltar.setLayoutY(210);
 		btnVoltar.setPrefHeight(20);
 		btnVoltar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
-		btnVoltar.setOnAction(voltar());
 	}
 
 	private EventHandler<ActionEvent> voltar() {
@@ -113,7 +114,7 @@ public class CadastrarJogadorFX extends Application {
 				try {
 					new LoginFX().start(stage);
 				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
+					System.err.println("Não foi possível iniciar a tela de login!");
 				}
 			}
 		};
@@ -156,7 +157,7 @@ public class CadastrarJogadorFX extends Application {
 				try {
 					new LoginFX().start(stage);
 				} catch (Exception e) {
-					System.err.println("Não foi possível iniciar a tela de cadastro de jogador!");
+					System.err.println("Não foi possível iniciar a tela de login!");
 				}
 			}
 		};

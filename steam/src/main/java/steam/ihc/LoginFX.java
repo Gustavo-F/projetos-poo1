@@ -43,6 +43,31 @@ public class LoginFX extends Application {
 		stage.show();
 	}
 
+	private void initComponentes() {
+		lblSteam = new Label("Bem-vindo à Steam");
+
+		txtUsuario = new TextField();
+		txtUsuario.setPromptText("Digite aqui seu usuário");
+
+		txtSenha = new PasswordField();
+		txtSenha.setPromptText("Digite aqui sua senha");
+
+		btnEntrar = new Button("Entrar");
+		btnEntrar.setOnAction(login());
+		
+		btnSair = new Button("Sair");
+		btnSair.setOnAction(sair());
+		
+		btnCadastrar = new Button("Registrar nova conta");
+		btnCadastrar.setOnAction(abrirJanelaCadastro());
+
+		pane = new AnchorPane();
+		pane.setPrefSize(320, 180);
+
+		pane.getChildren().add(lblSteam);
+		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
+	}
+
 	private void configLayout() {
 		lblSteam.setLayoutX(10);
 		lblSteam.setLayoutY(10);
@@ -61,39 +86,16 @@ public class LoginFX extends Application {
 		btnEntrar.setLayoutY(115);
 		btnEntrar.setPrefHeight(20);
 		btnEntrar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
-		btnEntrar.setOnAction(login());
 
 		btnSair.setLayoutX(btnEntrar.getPrefWidth() + 20);
 		btnSair.setLayoutY(115);
 		btnSair.setPrefHeight(20);
 		btnSair.setPrefWidth((pane.getPrefWidth() - 30) / 2);
-		btnSair.setOnAction(sair());
 
 		btnCadastrar.setLayoutX(10);
 		btnCadastrar.setLayoutY(145);
 		btnCadastrar.setPrefHeight(20);
 		btnCadastrar.setPrefWidth(pane.getPrefWidth() - 20);
-		btnCadastrar.setOnAction(abrirJanelaCadastro());
-	}
-
-	private void initComponentes() {
-		lblSteam = new Label("Bem-vindo à Steam");
-
-		txtUsuario = new TextField();
-		txtUsuario.setPromptText("Digite aqui seu usuário");
-
-		txtSenha = new PasswordField();
-		txtSenha.setPromptText("Digite aqui sua senha");
-
-		btnEntrar = new Button("Entrar");
-		btnSair = new Button("Sair");
-		btnCadastrar = new Button("Registrar nova conta");
-
-		pane = new AnchorPane();
-		pane.setPrefSize(320, 180);
-
-		pane.getChildren().add(lblSteam); // um a um
-		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
 	}
 
 	private EventHandler<ActionEvent> login() {
