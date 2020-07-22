@@ -65,12 +65,13 @@ public class CadastrarJogadorFX extends Application {
 		btnVoltar.setOnAction(voltar());
 
 		pane = new AnchorPane();
-		pane.setPrefSize(320, 245);
 		pane.getChildren().addAll(txtUsuario, txtEmail, txtSenha1, txtSenha2, txtApelido, btnCadastrar, btnVoltar);
 
 	}
 
 	private void configLayout() {
+		pane.setPrefSize(320, 245);
+		
 		txtUsuario.setLayoutX(10);
 		txtUsuario.setLayoutY(10);
 		txtUsuario.setPrefHeight(30);

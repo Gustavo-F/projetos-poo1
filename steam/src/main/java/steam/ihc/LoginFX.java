@@ -62,13 +62,14 @@ public class LoginFX extends Application {
 		btnCadastrar.setOnAction(abrirJanelaCadastro());
 
 		pane = new AnchorPane();
-		pane.setPrefSize(320, 180);
 
 		pane.getChildren().add(lblSteam);
 		pane.getChildren().addAll(txtUsuario, txtSenha, btnEntrar, btnSair, btnCadastrar);
 	}
 
 	private void configLayout() {
+		pane.setPrefSize(320, 180);
+		
 		lblSteam.setLayoutX(10);
 		lblSteam.setLayoutY(10);
 
