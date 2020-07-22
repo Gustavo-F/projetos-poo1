@@ -23,7 +23,7 @@ import steam.entidades.Desenvolvedora;
 import steam.entidades.Genero;
 import steam.entidades.Jogo;
 
-public class CadastrarJogoFX extends Application {
+public class AlterarJogoFX extends Application {
 
 	private String usuarioLogado;
 	private Stage stage;
@@ -35,10 +35,12 @@ public class CadastrarJogoFX extends Application {
 	private Label lblDesenvolvedora;
 	private ComboBox<String> cmbDesenvolvedora;
 	private Button btnVoltar;
-	private Button btnCadastrar;
+	private Button btnAlterar;
+	private Jogo jogo;
 
-	public CadastrarJogoFX(String usuarioLogado) {
+	public AlterarJogoFX(String usuarioLogado, Jogo jogo) {
 		this.usuarioLogado = usuarioLogado;
+		this.jogo = jogo;
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class CadastrarJogoFX extends Application {
 		btnVoltar.requestFocus();
 
 		stage.setScene(scene);
-		stage.setTitle("Registro de um novo jogo");
+		stage.setTitle("Alteração de um jogo");
 		stage.setResizable(false);
 		stage.show();
 	}
@@ -61,29 +63,34 @@ public class CadastrarJogoFX extends Application {
 	private void initComponentes() {
 		txtNome = new TextField();
 		txtNome.setPromptText("Nome do jogo");
+		txtNome.setText(jogo.getNome());
+		txtNome.setDisable(true);
 
 		txtPreco = new TextField();
 		txtPreco.setPromptText("Preço do jogo");
+		txtPreco.setText(String.valueOf(jogo.getPreco()));
 
 		lblGenero = new Label("Gênero:");
 		chbGenero = new ChoiceBox<>();
 		chbGenero.setItems(FXCollections.observableArrayList(geraListaGeneros()));
-		chbGenero.getSelectionModel().selectFirst();
+		chbGenero.getSelectionModel().select(jogo.getGeneros().get(0).getNome());
+		chbGenero.setDisable(true);
 
 		lblDesenvolvedora = new Label("Desenvolvedora:");
 		cmbDesenvolvedora = new ComboBox<>();
 		cmbDesenvolvedora.setItems(FXCollections.observableArrayList(geraListaDesenvolvedoras()));
-		cmbDesenvolvedora.getSelectionModel().selectFirst();
+		cmbDesenvolvedora.getSelectionModel().select(jogo.getDesenvolvedora().getNome());
+		cmbDesenvolvedora.setDisable(true);
 
-		btnCadastrar = new Button("Cadastrar");
-		btnCadastrar.setOnAction(cadastrar());
+		btnAlterar = new Button("Alterar");
+		btnAlterar.setOnAction(alterar());
 
 		btnVoltar = new Button("Voltar");
 		btnVoltar.setOnAction(voltar());
 
 		pane = new AnchorPane();
 		pane.getChildren().addAll(txtNome, txtPreco, lblGenero, chbGenero, lblDesenvolvedora, cmbDesenvolvedora,
-				btnCadastrar, btnVoltar);
+				btnAlterar, btnVoltar);
 
 	}
 
@@ -116,12 +123,12 @@ public class CadastrarJogoFX extends Application {
 		cmbDesenvolvedora.setPrefHeight(30);
 		cmbDesenvolvedora.setPrefWidth(pane.getPrefWidth() - 20);
 
-		btnCadastrar.setLayoutX(10);
-		btnCadastrar.setLayoutY(210);
-		btnCadastrar.setPrefHeight(20);
-		btnCadastrar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
+		btnAlterar.setLayoutX(10);
+		btnAlterar.setLayoutY(210);
+		btnAlterar.setPrefHeight(20);
+		btnAlterar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
 
-		btnVoltar.setLayoutX(btnCadastrar.getPrefWidth() + 20);
+		btnVoltar.setLayoutX(btnAlterar.getPrefWidth() + 20);
 		btnVoltar.setLayoutY(210);
 		btnVoltar.setPrefHeight(20);
 		btnVoltar.setPrefWidth((pane.getPrefWidth() - 30) / 2);
@@ -152,29 +159,19 @@ public class CadastrarJogoFX extends Application {
 		};
 	}
 
-	private EventHandler<ActionEvent> cadastrar() {
+	private EventHandler<ActionEvent> alterar() {
 		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (txtNome.getText().isBlank()) {
-					AlertaFX.alerta("Nome em branco!");
-					return;
-				}
 				if (txtPreco.getText().isBlank()) {
 					AlertaFX.alerta("Preço em branco!");
 					return;
 				}
 
-				Genero genero = new GeneroDAO().get(chbGenero.getSelectionModel().getSelectedItem());
-				Desenvolvedora desenvolvedora = new DesenvolvedoraDAO()
-						.get(cmbDesenvolvedora.getSelectionModel().getSelectedItem());
+				jogo.setPreco(Double.valueOf(txtPreco.getText()));
+				new JogoDAO().atualizar(jogo);
 
-				Jogo jogo = new Jogo(txtNome.getText(), desenvolvedora, Double.valueOf(txtPreco.getText()));
-				jogo.adicionaGenero(genero);
-
-				new JogoDAO().adicionar(jogo);
-
-				AlertaFX.info("Jogo cadastrado com sucesso :)");
+				AlertaFX.info("Jogo atualizado com sucesso :)");
 
 				abrirJanelaPrincipal();
 			}

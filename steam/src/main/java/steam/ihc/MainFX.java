@@ -134,8 +134,24 @@ public class MainFX extends Application {
 	}
 
 	private EventHandler<ActionEvent> abrirAlteracaoJogo() {
-		// TODO Auto-generated method stub
-		return null;
+		return new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (listaJogos.getSelectionModel().isEmpty()) {
+					AlertaFX.alerta("Selecione um jogo para ser alterado.");
+					return;
+				}
+				
+				String nomeJogo = listaJogos.getSelectionModel().getSelectedItem();
+				Jogo jogo = new JogoDAO().get(nomeJogo);
+				
+				try {
+					new AlterarJogoFX(usuarioLogado, jogo).start(stage);
+				} catch (Exception e) {
+					AlertaFX.erro("Não foi possível iniciar a tela de cadastro de um jogo!");
+				}
+			}
+		};
 	}
 
 	private EventHandler<ActionEvent> abrirCadastroJogo() {

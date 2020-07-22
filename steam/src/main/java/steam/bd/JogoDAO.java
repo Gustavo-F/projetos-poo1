@@ -25,7 +25,17 @@ public class JogoDAO implements InterfaceDAO<Jogo> {
 			AlertaFX.erro("Não foi possível inserir o jogo no banco!");
 		}
 	}
-
+	
+	public void atualizar(Jogo jogo) {
+		try {
+			String sql = "UPDATE Jogo SET Preco = " + jogo.getPreco() + " WHERE Nome = '"
+					+ jogo.getNome() + "'";
+			UtilBD.alterarBD(sql);
+		} catch (SQLException e) {
+			AlertaFX.erro("Não foi possível atualizar o jogo no banco!");
+		}
+	}
+	
 	public void remover(Jogo jogo) {
 		try {
 			String sql = "DELETE FROM Jogo WHERE nome = '" + jogo.getNome() + "'";
